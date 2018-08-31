@@ -3,7 +3,7 @@ filetype on
 syntax on
 
 "theme
-colorscheme lucariox
+colorscheme dracula
 
 "numbering
 set number
