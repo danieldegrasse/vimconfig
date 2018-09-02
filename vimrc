@@ -29,3 +29,9 @@ nmap <F9> mz:execute TabToggle()<CR>'z
 
 "smart indent
 set smartindent
+
+"search options
+set ignorecase
+set smartcase
+set incsearch
+
