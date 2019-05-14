@@ -3,7 +3,7 @@ filetype on
 syntax on
 
 "theme
-colorscheme dracula
+colorscheme gruvbox
 
 "numbering
 set number
@@ -35,3 +35,5 @@ set ignorecase
 set smartcase
 set incsearch
 
+"make background dark
+set background=dark
