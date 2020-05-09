@@ -1,9 +1,13 @@
 "syntax highlighting
-filetype on
+filetype plugin indent on
 syntax on
 
+"80 column indicator
+set colorcolumn=80
+
+
 "theme
-colorscheme dracula
+colorscheme gruvbox
 
 "numbering
 set number
