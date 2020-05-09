@@ -5,12 +5,14 @@ syntax on
 "80 column indicator
 set colorcolumn=80
 
-
 "theme
 colorscheme gruvbox
 
 "numbering
 set number
+
+"enable powerline fonts for airline
+let g:airline_powerline_fonts = 1
 
 "switch between tabs and spaces
 " virtual tabstops using spaces
