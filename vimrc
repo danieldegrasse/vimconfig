@@ -39,3 +39,5 @@ set ignorecase
 set smartcase
 set incsearch
 
+"make background dark
+set background=dark
