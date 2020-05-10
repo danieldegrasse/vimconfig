@@ -26,12 +26,11 @@ let g:header_field_modified_timestamp = 0
 "set us modification date formate
 let g:header_field_timestamp_format = '%B %e, %Y'
 
-"switch between tabs and spaces
-" virtual tabstops using spaces
-set shiftwidth=4
-set softtabstop=4
+"automatically expand tabs into 8 spaces
+set shiftwidth=8
+set softtabstop=8
 set expandtab
-" allow toggling between local and default mode
+"Toggle tabs on (useful for makefiles)
 function TabToggle()
   if &expandtab
     set shiftwidth=8
