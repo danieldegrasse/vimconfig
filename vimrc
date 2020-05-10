@@ -14,6 +14,18 @@ set number
 "enable powerline fonts for airline
 let g:airline_powerline_fonts = 1
 
+"configure email and name for vim-header
+let g:header_field_author = 'Daniel DeGrasse'
+let g:header_field_author_email = 'daniel@degrasse.com'
+"map F4 to add header
+map <F4> :AddHeader<CR>
+"do not automatically add headers
+let g:header_auto_add_header = 0
+"do not add last-modified timestamp
+let g:header_field_modified_timestamp = 0
+"set us modification date formate
+let g:header_field_timestamp_format = '%B %e, %Y'
+
 "switch between tabs and spaces
 " virtual tabstops using spaces
 set shiftwidth=4
