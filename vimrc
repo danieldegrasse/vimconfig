@@ -5,6 +5,9 @@ syntax on
 "80 column indicator
 set colorcolumn=80
 
+"five modelines
+set modelines=5
+
 "theme
 colorscheme gruvbox
 
@@ -21,8 +24,9 @@ let g:header_field_author_email = 'daniel@degrasse.com'
 map <F4> :AddHeader<CR>
 "do not automatically add headers
 let g:header_auto_add_header = 0
-"do not add last-modified timestamp
+"do not add last-modified timestamp or last modified author
 let g:header_field_modified_timestamp = 0
+let g:header_field_modified_by = 0
 "set us modification date formate
 let g:header_field_timestamp_format = '%B %e, %Y'
 
@@ -54,3 +58,6 @@ set incsearch
 
 "make background dark
 set background=dark
+
+"enable spellcheck
+set spell
