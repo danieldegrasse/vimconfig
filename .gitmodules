@@ -1,6 +1,3 @@
 [submodule "pack/dist/start/vim-airline"]
 	path = pack/dist/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
-[submodule "/Users/danieldegrasse/.vim/pack/dist/start/vim-header"]
-	path = /Users/danieldegrasse/.vim/pack/dist/start/vim-header
-	url = https://github.com/alpertuna/vim-header.git
