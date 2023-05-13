@@ -17,11 +17,11 @@ set number
 "enable powerline fonts for airline
 let g:airline_powerline_fonts = 1
 
-"automatically expand tabs into 8 spaces
+"default to indentation with tabs
 set shiftwidth=8
-set softtabstop=8
-set expandtab
-"Toggle tabs on (useful for makefiles)
+set softtabstop=0
+set noexpandtab
+"Toggle between tabs and spaces
 function TabToggle()
   if &expandtab
     set shiftwidth=8
