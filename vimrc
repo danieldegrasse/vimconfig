@@ -83,6 +83,12 @@ endfunction
 " ################################################
 "                Editor Settings
 " ################################################
+"
+
+" Disable X11 clipboard by default.
+if $DISPLAY =~ 'localhost:.*'
+	set clipboard=autoselect,exclude:.*
+endif
 
 " smart indent
 set smartindent
