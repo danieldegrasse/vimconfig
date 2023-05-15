@@ -77,7 +77,10 @@ function! CreateTerm()
 	execute "set nobuflisted"
 endfunction
 
-:command Term call CreateTerm()
+command Term call CreateTerm()
+
+" Strip whitespace from file
+command WStrip :%s/\s\+$//e
 
 
 " ################################################
@@ -109,9 +112,6 @@ colorscheme dracula
 
 " Use terminal gui colors
 set termguicolors
-
-" Strip trailing whitespace from files
-autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " 80 column indicator
 set colorcolumn=80
