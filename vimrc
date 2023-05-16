@@ -83,6 +83,31 @@ command Term call CreateTerm()
 command WStrip :%s/\s\+$//e
 
 
+" Open a FZF window with ripgrep. If a directory is provided, search
+" there. Otherwise use $PWD.
+function! LaunchRg(dir)
+	" Get directory, default to PWD if the argument is empty
+	if len(a:dir) == 0
+		" Fallback to CWD
+		let path = getcwd()
+	else
+		let directory = a:dir
+		let path = system('realpath '.shellescape(directory))[:-2]
+		if !isdirectory(path)
+			echo "Directory not found: ".path
+			" Error here, don't launch FZF Rg window
+			return 1
+		endif
+	endif
+	" Note- the shellescape('') seems to be needed here. Unclear why.
+	call fzf#vim#grep("rg --column --line-number --no-heading
+		\ --color=always --smart-case -- ".shellescape(''), 1,
+	        \ fzf#vim#with_preview({'dir': path}), 0)
+endfunction
+
+" Replace standard Rg command to instead launch our Rg function
+command! -complete=file -nargs=* Rg call LaunchRg(<q-args>)
+
 " ################################################
 "                Editor Settings
 " ################################################
