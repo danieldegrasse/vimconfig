@@ -118,6 +118,11 @@ if $DISPLAY =~ 'localhost:.*'
 	set clipboard=autoselect,exclude:.*
 endif
 
+" Setup windows specific options
+if has('win32') || has('win64')
+	set backspace=2
+endif
+
 " smart indent
 set smartindent
 
