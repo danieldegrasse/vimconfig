@@ -79,8 +79,33 @@ endfunction
 
 command Term call CreateTerm()
 
-" Strip whitespace from file
-command WStrip :%s/\s\+$//e
+" Enable whitespace stripping by default
+let g:EnableWStrip = 1
+
+" This function strips whitespace from a file, when the setting is enabled.
+" Otherwise is is a no-op.
+function! TrimWhiteSpace()
+	if g:EnableWStrip
+		" Set mark at current position
+		normal mZ
+		" Strip whitespace
+		%s/\s\+$//e
+		" Check if cursor moved, if so alert user we removed
+		" whitespace
+		if line("'Z") != line(".")
+			echo "Stripped whitespace\n"
+		endif
+		" Jump back to mark
+		normal `Z
+	endif
+endfunction
+
+" Run whitespace strip function before buffer write
+autocmd BufWritePre * call TrimWhiteSpace()
+
+command EnableWStrip let g:EnableWStrip=1
+command DisableWStrip let g:EnableWStrip=0
+
 
 
 " Open a FZF window with ripgrep. If a directory is provided, search
