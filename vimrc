@@ -173,3 +173,6 @@ set colorcolumn=80
 
 " numbering
 set number
+
+" set gui font to one with powerline glyphs
+set guifont=CaskaydiaCove\ Nerd\ Font\ Mono
