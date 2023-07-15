@@ -106,6 +106,22 @@ autocmd BufWritePre * call TrimWhiteSpace()
 command EnableWStrip let g:EnableWStrip=1
 command DisableWStrip let g:EnableWStrip=0
 
+" Set the width of a tab. Useful when editing files
+" Where the filetype plugin selects the wrong indentation standard
+function! SetTabWidth(num)
+	if a:num == 8
+		" Using tabs, don't expand tabs to spaces
+		set noexpandtab
+		let &tabstop=8
+		let &shiftwidth=8
+	else
+	    set expandtab
+		let &tabstop=a:num
+		let &shiftwidth=a:num
+	endif
+endfunction
+
+command -nargs=1 TabSpacing call SetTabWidth(<f-args>)
 
 
 " Open a FZF window with ripgrep. If a directory is provided, search
