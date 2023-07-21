@@ -112,11 +112,11 @@ function! SetTabWidth(num)
 	if a:num == 8
 		" Using tabs, don't expand tabs to spaces
 		set noexpandtab
-		let &tabstop=8
+		let &softtabstop=8
 		let &shiftwidth=8
 	else
 	    set expandtab
-		let &tabstop=a:num
+		let &softtabstop=a:num
 		let &shiftwidth=a:num
 	endif
 endfunction
