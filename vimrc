@@ -164,8 +164,10 @@ if has('win32') || has('win64')
 	set backspace=2
 endif
 
-" smart indent
-set smartindent
+" use cindent, this takes precedence over smartindent
+set cindent
+" Set cindent options to indent aligning with parenthesis
+set cinoptions=(0
 
 " search options
 set ignorecase
