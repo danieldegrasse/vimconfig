@@ -149,6 +149,34 @@ endfunction
 " Replace standard Rg command to instead launch our Rg function
 command! -complete=file -nargs=* Rg call LaunchRg(<q-args>)
 
+" This function gets a link to a specific line of code in the current file
+" on Github. It can be used to refer to code by a link that is being viewed
+" in a local editor
+function! GitHubLink()
+	" Get current line number
+	let pos = getpos('.')
+	let linenum = pos[1]
+	" Get directory of file, for use with Git commandline
+	let file_dir = expand('%:p:h')
+	" List git remotes
+	let git_remotes = systemlist('git -C ' . file_dir . ' remote')
+	" Use upstream as remote if it exists, or fall back to origin
+	if index(git_remotes, "upstream") != -1
+		let cmd = 'git -C ' . file_dir . ' remote get-url upstream'
+	else
+		let cmd = 'git -C ' . file_dir . ' remote get-url origin'
+	endif
+	let remote = trim(system(cmd))
+	" Trim .git suffix on url
+	let remote = substitute(remote, '.git$', '', '')
+	let cmd = 'git -C ' . file_dir . ' ls-files --full-name ' . expand('%:p')
+	let git_file = trim(system(cmd))
+	" Abuse a feature of the github API- using master as branch name
+	" always seems to redirect us to default branch
+	let url = remote . '/tree/master/' . git_file . '#L' . linenum
+	echo url
+endfunction
+
 " ################################################
 "                Editor Settings
 " ################################################
