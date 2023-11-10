@@ -167,7 +167,8 @@ endif
 " use cindent, this takes precedence over smartindent
 set cindent
 " Set cindent options to indent aligning with parenthesis
-set cinoptions=(0
+" and remove case label indents
+set cinoptions=(0:0
 
 " search options
 set ignorecase
