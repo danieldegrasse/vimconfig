@@ -40,6 +40,8 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 " format tabline with just filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+" show buffer number in tabline
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " ################################################
 "                Keyboard shortcuts
