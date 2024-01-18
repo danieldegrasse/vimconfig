@@ -173,9 +173,9 @@ function! GitHubLink()
 	let remote = substitute(remote, '.git$', '', '')
 	let cmd = 'git -C ' . file_dir . ' ls-files --full-name ' . expand('%:p')
 	let git_file = trim(system(cmd))
-	" Abuse a feature of the github API- using master as branch name
-	" always seems to redirect us to default branch
-	let url = remote . '/tree/master/' . git_file . '#L' . linenum
+	let cmd = 'git -C ' . file_dir . ' rev-parse HEAD'
+	let git_head = trim(system(cmd))
+	let url = remote . '/blob/' . git_head . '/' . git_file . '#L' . linenum
 	echo url
 endfunction
 
