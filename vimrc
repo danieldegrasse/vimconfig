@@ -173,8 +173,17 @@ function! GitHubLink()
 	let remote = substitute(remote, '.git$', '', '')
 	let cmd = 'git -C ' . file_dir . ' ls-files --full-name ' . expand('%:p')
 	let git_file = trim(system(cmd))
-	let cmd = 'git -C ' . file_dir . ' rev-parse HEAD'
+	let cmd = 'git -C ' . file_dir . ' rev-parse --abbrev-ref HEAD'
 	let git_head = trim(system(cmd))
+	if git_head =='main' || git_head == 'master'
+		" Get the SHA of the actual commit, so the link stays valid
+		let cmd = 'git -C ' . file_dir . ' rev-parse HEAD'
+		let git_head = trim(system(cmd))
+	else
+		" Abuse a feature of the github API- using master as branch name
+		" always seems to redirect us to default branch
+		let git_head = 'master'
+	endif
 	let url = remote . '/blob/' . git_head . '/' . git_file . '#L' . linenum
 	echo url
 endfunction
