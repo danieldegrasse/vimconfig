@@ -145,7 +145,8 @@ function! LaunchRg(dir)
 	" Note- the shellescape('') seems to be needed here. Unclear why.
 	call fzf#vim#grep("rg --column --line-number --no-heading
 		\ --color=always --smart-case -- ".shellescape(''), 1,
-	        \ fzf#vim#with_preview({'dir': path}), 0)
+	        \ fzf#vim#with_preview({'dir': path, 'options':
+		\ '--delimiter : --nth 4..'}), 0)
 endfunction
 
 " Replace standard Rg command to instead launch our Rg function
