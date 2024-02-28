@@ -150,7 +150,45 @@ function! LaunchRg(dir)
 endfunction
 
 " Replace standard Rg command to instead launch our Rg function
-command! -complete=file -nargs=* Rg call LaunchRg(<q-args>)
+command! -complete=dir -nargs=* Rg call LaunchRg(<q-args>)
+
+" Open FZF window with fdfind. If the current working directory contains
+" a file named 'fzf.conf', source it and use the SEARCH_DIRS variable to
+" determine which directories to search.
+" If a file path is provided, search it directly, without reading fzf.conf.
+function! SmartFiles(dir)
+	if len(a:dir) == 0
+		" Check for fzf.conf from PWD
+		let path = getcwd()
+		if filereadable(path . '/fzf.conf')
+			for line in readfile(path . '/fzf.conf')
+				if line =~ 'SEARCH_DIRS\s*='
+					let dirs = substitute(line,
+						\ 'SEARCH_DIRS\s*=\s*', '', 'g')
+				endif
+			endfor
+		else
+			let dirs = '.'
+		endif
+		" Now launch fdfind with list of directories
+		call fzf#run(fzf#wrap(fzf#vim#with_preview(
+			\ {'source': 'fdfind --no-ignore . '.dirs, 'sink': 'e'})))
+	else
+		" If directory is provided, use it and skip fzf.conf
+		let directory = a:dir
+		let path = system('realpath '.shellescape(directory))[:-2]
+		if !isdirectory(path)
+			echo "Directory not found: ".path
+			" Error here, don't launch FZF find window
+			return 1
+		endif
+		" Call FZF files directly
+		call fzf#vim#files(directory, fzf#vim#with_preview())
+	endif
+endfunction
+
+" Replace standard Files command to instead launch our Files function
+command! -complete=dir -nargs=* Files call SmartFiles(<q-args>)
 
 " This function gets a link to a specific line of code in the current file
 " on Github. It can be used to refer to code by a link that is being viewed
