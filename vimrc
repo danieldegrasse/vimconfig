@@ -170,9 +170,18 @@ function! SmartFiles(dir)
 		else
 			let dirs = '.'
 		endif
+		if executable('fd')
+			" Use fd as the find executable
+			let exec='fd'
+		elseif executable('fdfind')
+			let exec='fdfind'
+		else
+			echo 'Error, fdfind is not installed'
+			return 1
+		endif
 		" Now launch fdfind with list of directories
 		call fzf#run(fzf#wrap(fzf#vim#with_preview(
-			\ {'source': 'fdfind --no-ignore . '.dirs, 'sink': 'e'})))
+			\ {'source': exec.' --no-ignore . '.dirs, 'sink': 'e'})))
 	else
 		" If directory is provided, use it and skip fzf.conf
 		let directory = a:dir
