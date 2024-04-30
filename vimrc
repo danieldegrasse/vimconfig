@@ -135,7 +135,7 @@ function! LaunchRg(dir)
 		let path = getcwd()
 	else
 		let directory = a:dir
-		let path = system('realpath '.shellescape(directory))[:-2]
+		let path = expand(directory)
 		if !isdirectory(path)
 			echo "Directory not found: ".path
 			" Error here, don't launch FZF Rg window
@@ -185,7 +185,7 @@ function! SmartFiles(dir)
 	else
 		" If directory is provided, use it and skip fzf.conf
 		let directory = a:dir
-		let path = system('realpath '.shellescape(directory))[:-2]
+		let path = expand(directory)
 		if !isdirectory(path)
 			echo "Directory not found: ".path
 			" Error here, don't launch FZF find window
