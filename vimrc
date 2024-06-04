@@ -282,3 +282,6 @@ set number
 
 " set gui font to one with powerline glyphs
 set guifont=CaskaydiaCove\ Nerd\ Font\ Mono
+
+" Map .overlay files to the dts file type
+autocmd BufRead,BufNewFile *.overlay set filetype=dts
