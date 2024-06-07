@@ -16,8 +16,8 @@ Plug 'junegunn/fzf'
 " Install extra scripts for fzf
 Plug 'junegunn/fzf.vim'
 
-" Install dracula theme
-Plug 'dracula/vim', { 'as': 'dracula' }
+" Install gruvbox theme
+Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 
 " Install vim-cpp-modern for better syntax highlighting
 Plug 'bfrg/vim-cpp-modern'
@@ -268,8 +268,11 @@ set background=dark
 " enable spellcheck
 set spell
 
-" Set colorscheme to dracula
-colorscheme dracula
+" Set colorscheme to gruvbox
+colorscheme gruvbox
+
+" Set SpellBad highlighting to underline
+hi SpellBad cterm=underline
 
 " Use terminal gui colors
 set termguicolors
