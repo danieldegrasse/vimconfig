@@ -25,6 +25,9 @@ Plug 'bfrg/vim-cpp-modern'
 " Add airline
 Plug 'vim-airline/vim-airline'
 
+" Install fugitive
+Plug 'tpope/vim-fugitive'
+
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
