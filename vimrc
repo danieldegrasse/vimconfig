@@ -71,6 +71,8 @@ nmap <leader>sf :Files<CR>
 nmap <leader>sh :Files ~<CR>
 " Fuzzy search open buffers
 nmap <leader>sb :Buffers<CR>
+" Search word under the cursor
+nmap <leader>sw :CurRg<CR>
 
 " ################################################
 "                Custom commands
@@ -131,7 +133,7 @@ command -nargs=1 TabSpacing call SetTabWidth(<f-args>)
 
 " Open a FZF window with ripgrep. If a directory is provided, search
 " there. Otherwise use $PWD.
-function! LaunchRg(dir)
+function! LaunchRg(dir, ...)
 	" Get directory, default to PWD if the argument is empty
 	if len(a:dir) == 0
 		" Fallback to CWD
@@ -145,15 +147,24 @@ function! LaunchRg(dir)
 			return 1
 		endif
 	endif
-	" Note- the shellescape('') seems to be needed here. Unclear why.
-	call fzf#vim#grep("rg --column --line-number --no-heading
-		\ --color=always --smart-case -- ".shellescape(''), 1,
+	let prefill = get(a:, 1, 0)
+	if prefill == 1
+		let query = expand("<cword>")
+	else
+		let query = ''
+	endif
+	call fzf#vim#grep2("rg --column --line-number --no-heading
+		\ --color=always --smart-case -- ", query,
 	        \ fzf#vim#with_preview({'dir': path, 'options':
 		\ '--delimiter : --nth 4..'}), 0)
 endfunction
 
 " Replace standard Rg command to instead launch our Rg function
 command! -complete=dir -nargs=* Rg call LaunchRg(<q-args>)
+
+" Add Custom Rg command to search word under cursor
+command! -complete=dir -nargs=* CurRg call LaunchRg(<q-args>, 1)
+
 
 " Open FZF window with fdfind. If the current working directory contains
 " a file named 'fzf.conf', source it and use the SEARCH_DIRS variable to
