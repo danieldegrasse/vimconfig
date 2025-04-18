@@ -250,6 +250,14 @@ function! GitHubLink()
 	echo url
 endfunction
 
+function ToggleBackgroundOfEditor()
+    let &background = &background == "dark" ? "light" : "dark"
+endfunction
+
+" Toggles the background color between light and dark when pressing F12
+nnoremap <silent> <F12> :call ToggleBackgroundOfEditor()<cr>
+" And additonal remaps for other modes
+
 " ################################################
 "                Editor Settings
 " ################################################
