@@ -186,16 +186,16 @@ function! SmartFiles(dir)
 		endif
 		if executable('fd')
 			" Use fd as the find executable
-			let exec='fd'
+			let src='fd  --no-ignore . '.dirs
 		elseif executable('fdfind')
-			let exec='fdfind'
+			let src='fdfind  --no-ignore . '.dirs
 		else
-			echo 'Error, fdfind is not installed'
-			return 1
+			echo 'Warning, fdfind is not installed'
+			let src='find '.dirs
 		endif
 		" Now launch fdfind with list of directories
 		call fzf#run(fzf#wrap(fzf#vim#with_preview(
-			\ {'source': exec.' --no-ignore . '.dirs, 'sink': 'e'})))
+			\ {'source': src, 'sink': 'e'})))
 	else
 		" If directory is provided, use it and skip fzf.conf
 		let directory = a:dir
@@ -296,8 +296,10 @@ colorscheme gruvbox
 " Set SpellBad highlighting to underline
 hi SpellBad cterm=underline
 
-" Use terminal gui colors
-set termguicolors
+if has('termguicolors')
+	" Use terminal gui colors
+	set termguicolors
+endif
 
 " 80 column indicator
 set colorcolumn=80
